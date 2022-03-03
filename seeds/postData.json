@@ -1,0 +1,12 @@
+[
+    {
+        "user_id": 1,
+        "title": "Bacon Ipsum",
+        "content": "Spicy jalapeno bacon ipsum dolor amet biltong pancetta turducken, cow shoulder meatloaf bresaola t-bone shank jowl landjaeger kevin. Flank short loin pancetta, bresaola leberkas spare ribs sirloin ribeye. "
+    },
+    {
+        "user_id": 2,
+        "title": "Lorem Ipsum",
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum vero deleniti nihil doloremque. Laborum dolores ad provident asperiores ut odit! Suscipit maxime aperiam quidem esse quos voluptatibus quis, consectetur debitis."
+    }
+]
