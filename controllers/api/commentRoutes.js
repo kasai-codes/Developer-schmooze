@@ -2,13 +2,33 @@ const router = require('express').Router();
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.get('/', (req, res) => {
-    Comment.findAll({})
-      .then(dbCommentData => res.json(dbCommentData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
+router.put('/:id', async (req, res) => {
+  try {
+      const updateData = await Comment.update(req.body, {
+          where: {
+              id: req.params.id
+          }
       });
+
+      res.status(200).json({
+          message: `Comment updated by ${req.session.username} at ${post.updatedAt}`
+      });
+  } catch (err) {
+      let message = 'Something went wrong.';
+
+      if (!err.errors) {
+          res.status(400).json({
+              message,
+            
+          });
+          return;
+      }
+
+      res.status(400).json({
+          message,
+         
+      });
+  }
 });
 
 router.post('/', withAuth, (req, res) => {

@@ -1,0 +1,16 @@
+<h1 class="text-center">{{username}}'s Posts</h1>
+  <form action="/createpost">
+    <button type="button" class="btn btn-primary btn-lg">Create Post</button>
+  </form>
+
+  {{#each posts as |post}}
+
+  <div class="mb-3">
+      <h3>post.title</h3>
+<div>Updated at: {{format_date post.updatedAt}}</div>
+<div>Created at: {{format_date post.createdAt}}</div>
+      <a href="/edit/{{post.id}}"><button type="button" class="btn btn-warning">Edit Post</button></a>
+  </div>
+
+
+{{/each}}

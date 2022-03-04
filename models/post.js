@@ -1,40 +1,56 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
-// create our Post model
 class Post extends Model {}
 
-// create fields/columns for Post model
 Post.init(
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
-      },
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      post_content: {
-        type: DataTypes.TEXT,
-        allowNull: true
-      },
-      user_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'user',
-          key: 'id'
-        }
-      }
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
-      sequelize,
-      freezeTableName: true,
-      underscored: true,
-      modelName: 'post'
-    }
-  );
+    user_id: {
+      type: DataTypes.INTEGER,
+      onDelete: "SET NULL",
+      references: {
+        model: "user",
+        key: "id",
+      },
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    content: {
+      type: DataTypes.TEXT,
+    },
+  },
+  {
+    hooks: {
+      beforeBulkCreate: (postsData) => {
+        postsData = postsData.map((postData) => {
+          postData.content = postData.content.replaceAll("\n", "<br />");
+          return postData;
+        });
+        return postsData;
+      },
+      beforeCreate: (postData) => {
+        postData.content = postData.content.replaceAll("\n", "<br />");
+        return postData;
+      },
+      beforeUpdate: (postData) => {
+        postData.content = postData.content.replaceAll("\n", "<br />");
+        return postData;
+      },
+    },
+    sequelize,
+    timestamps: true,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "post",
+  }
+);
 
-  module.exports = Post;
+module.exports = Post;

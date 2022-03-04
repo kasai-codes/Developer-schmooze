@@ -13,7 +13,7 @@ Comment.init(
       },
       user_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        onDelete: 'SET NULL',
         references: {
           model: 'user',
           key: 'id'
@@ -21,22 +21,19 @@ Comment.init(
       },
       post_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        onDelete: 'CASCADE',
         references: {
-          model: 'post',
-          key: 'id'
+            model: 'post',
+            key: 'id',
         }
       },
       comment_text: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            len: [1]
-        }
       }
   },
   {
     sequelize,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'comment'
@@ -44,3 +41,5 @@ Comment.init(
 );
 
 module.exports = Comment;
+
+
