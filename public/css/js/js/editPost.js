@@ -31,7 +31,7 @@ const editFormHandler = async (event) => {
     const id = window.location.pathname.split('/').pop();
 
     if (id) {
-        const response = await fetch('/api/article/' + id, {
+        const response = await fetch('/api/post/' + id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

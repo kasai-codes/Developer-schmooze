@@ -1,19 +1,19 @@
 [
     {
         "user_id": 2,
-        "article_id": 1,
+        "post_id": 1,
         "title": "Great!",
         "content": "I love meat!!!"
     },
     {
         "user_id": 1,
-        "article_id": 1,
+        "post_id": 1,
         "title": "What's a beefcake?",
         "content": "Beef shaped cake"
     },
     {
         "user_id": 1,
-        "article_id": 2,
+        "post_id": 2,
         "title": "Latin?",
         "content": "I love Latin!"
     }
