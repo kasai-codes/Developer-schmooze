@@ -1,42 +1,39 @@
-<div class="row">
-  <div class="col-md-6">
-    <h2>Login</h2>
+<div class="logout-page d-flex row align-items-center row-cols-sm-1 row-cols-md-3 row-cols-lg-3 row-cols-xl-3  m-5">
+  <form id="login-form1" class="login-form1 row rounded-3 g-2 m-4 p-2" style="background-color: rgb(255,255,255,.8);">
+    <h2 class="text-start pt-2 pb-4 border-bottom border-3 border-black">Existing Users:<br>
+      Login</h2>
+    <div class="userValidation d-none"></div>
+    <div class="col-md-12">
+      <label for="username" class="form-label">Username</label>
+      <input id="username-login1" type="username" class="form-control" />
+    </div>
 
-    <form class="form login-form">
-      <div class="form-group">
-        <label for="email-login">email:</label>
-        <input class="form-input" type="text" id="email-login" />
-      </div>
-      <div class="form-group">
-        <label for="password-login">password:</label>
-        <input class="form-input" type="password" id="password-login" />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">login</button>
-      </div>
-    </form>
-  </div>
-  <div class="col-md-6">
-    <h2>Signup</h2>
+    <div class="col-md-12">
+      <label for="inputPassword4" class="form-label">Password</label>
+      <input id="password-login1" type="password" class="form-control password-login1" />
 
-    <form class="form signup-form">
-      <div class="form-group">
-        <label for="name-signup">name:</label>
-        <input class="form-input" type="text" id="name-signup" />
-      </div>
-      <div class="form-group">
-        <label for="email-signup">email:</label>
-        <input class="form-input" type="text" id="email-signup" />
-      </div>
-      <div class="form-group">
-        <label for="password-signup">password:</label>
-        <input class="form-input" type="password" id="password-signup" />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">signup</button>
-      </div>
-    </form>
-  </div>
+    </div>
+    <div class="gy-3 py-3 my-3 text-center col-12">
+      <button type="submit" class="btn btn-lg btn-dark">Sign in</button>
+    </div>
+  </form>
+  <br>
+  <br>
+  <form id="signup-form1" class="signup-form1 row rounded-3 g-2 m-4 p-2">
+    <h2 class="text-start pt-2 pb-4 border-bottom border-3" style="border-color: #283130">New Users:<br>Create Account
+    </h2>
+    <div class="userCreateValidation d-none"></div>
+    <div class="col-md-12">
+      <label for="username" class="form-label">Username</label>
+      <input id="username-signup1" type="username" class="form-control username-signup1" />
+
+    </div>
+    <div class="col-md-12">
+      <label for="inputPassword4" class="form-label">Password</label>
+      <input id="password-signup1" type="password" class="form-control password-signup1" />
+    </div>
+    <div class="gy-3 py-3 my-3 text-center col-12">
+      <button type="submit" class="btn btn-lg btn-dark">Sign Up</button>
+    </div>
+  </form>
 </div>
-
-<script src="./js/login.js"></script>
