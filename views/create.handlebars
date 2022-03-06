@@ -1,20 +1,24 @@
 <br>
-<div class="container post-form">
-    <div class="row">
-        <div class="mb-3">
-            <br>
-            <input type="text" class="title" placeholder="Post Title">
-        </div>
-        <div class="mb-3">
-            <br>
-            <textarea class="form-control" style="height: 200px;" id="content" rows="3"></textarea>
-        </div>
-
-    </div>
-
-    <div>
-        <button class="btn btn-primary btn-lg" type="submit">Post</button>
-    </div>
-
+<form class="post-form">
+<div class="mb-3 post-form">
+  <label for="formGroupExampleInput" class="form-label">Post title</label>
+  <input type="text" class="form-control" >
 </div>
-<script src="/js/createpost.js"></script>
+<br>
+
+ <input type="hidden" id="post_id" value="{{post.id}}">
+  <div class="form-floating">
+    <textarea class="form-control" id="content"
+      style="height: 200px"></textarea>
+
+    <br>
+    <button class="btn btn-primary">Post</button>
+  </div>
+</form>
+
+
+
+
+<script src="/js/createpost.js"></script><div>
+        
+    </div>
