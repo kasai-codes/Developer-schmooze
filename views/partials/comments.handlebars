@@ -1,0 +1,27 @@
+{{#each comments as |comment| }}
+<div class="row mb-4 post comments" style="margin-top:50px;">
+  <div>
+
+    <p>
+      {{post_comment}}
+    </p>
+
+    <div class="comment-user-info">
+      <p style="margin-bottom:0.5rem; margin-top: 10px;">
+
+        {{!-- Name of person that submitted comment. --}}
+        <span style="margin-right:20px;">
+         {{user.name}}
+        </span>
+
+        {{!-- Date comment submitted. --}}
+        <span style="margin-right:20px;">
+          
+          {{format_date createdAt}}      
+        </span>
+      </p>
+    </div>
+
+  </div>
+</div>
+{{/each}}

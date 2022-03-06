@@ -1,0 +1,68 @@
+<div style="margin-bottom:30px;">
+  <h2>{{title}}</h2>
+
+  {{!-- Post Meta: User & Date Submitted --}}
+  <p>
+    <span style="margin-right:20px;">
+      {{user.name}}
+    </span>
+    <span style="margin-right:20px;">
+      {{!-- {{format_date createdAt}} --}}
+    </span>
+  </p>
+
+  {{!-- Post Content --}}
+  <p>{{content}}</p>
+
+  {{!-- Delete & Edit Buttons --}}
+  {{#if userPost}}
+    <div class="d-flex">
+
+      {{!-- Delete --}}
+      <div class="delete-button" style="margin-right:10px;">
+        <button type="click" class="theme-button" data-id="{{id}}">Delete</button>
+      </div>
+    
+    {{!-- Edit --}}
+      <a href="/post/edit/{{id}}" class="secondary-button">
+        Edit
+      </a>
+
+    </div>
+
+  {{/if}}
+
+</div>
+
+
+  {{!-- Comment Section --}}
+  {{#if logged_in}}
+    
+    {{!-- Logged in User can submit a comment --}}
+    <form class="comment-form" style="padding-top:40px;">
+
+      <div class="form-group mb-3">
+        <label for="post-comment" class="form-label"><h6>Share Your Thoughts</h6></label>
+          <textarea class="form-input" id="post-comment" name="post-comment"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="theme-button">Add Comment</button>
+      </div>
+
+    </form>
+
+  {{else}}
+    {{!-- Logged out User will be directed to sign in to leave a comment. --}}
+    <a class="link" href="/login"><h6>Log in to post a comment.</h6></a>
+
+  {{/if}}
+  
+{{!-- DISPLAYS COMMENTS, IF ANY. --}}
+
+  {{>comments}}
+
+  {{#if logged_in}}
+    <script src="/js/comment.js"></script>
+  {{/if}}
+
+<script src="/js/editPost.js"></script>

@@ -1,42 +1,26 @@
-
-<div class="container mx-auto">
-<div class="logout-page d-flex row row-cols-sm-1 row-cols-md-3 row-cols-xl-3  m-5">
-  <form id="login-form1" class="login-form1 row rounded-3 g-2 m-4 p-2" style="background-color: rgb(255,255,255,.8);">
-    <h2 class="text-start pt-2 pb-4 border-bottom border-3 border-black">Existing Users:<br>
-      Login</h2>
-    <div class="userValidation d-none"></div>
-    <div class="col-md-12">
-      <label for="username" class="form-label">Username</label>
-      <input id="username-login1" type="username" class="form-control" />
-    </div>
-
-    <div class="col-md-12">
-      <label for="inputPassword4" class="form-label">Password</label>
-      <input id="password-login1" type="password" class="form-control password-login1" />
-
-    </div>
-    <div class="gy-3 py-3 my-3 text-center col-12">
-      <button type="submit" class="btn btn-lg btn-dark">Sign in</button>
-    </div>
-  </form>
-  <br>
-  <br>
-  <form id="signup-form1" class="signup-form1 row rounded-3 g-2 m-4 p-2">
-    <h2 class="text-start pt-2 pb-4 border-bottom border-3" style="border-color: #283130">New Users:<br>Create Account
-    </h2>
+<div class="row m-3" id="newHere">
+  <form id="signup-form" class="col col-lg-6 col-sm-8 col-xs-12 mx-auto signup-form rounded-3  m-2 ">
     <div class="userCreateValidation d-none"></div>
-    <div class="col-md-12">
+    <h2 class="text-start pt-2 pb-4 border-bottom border-3 text-center" style="border-color: #283130">Existing users log
+      in</h2>
+
+    <div class>
       <label for="username" class="form-label">Username</label>
-      <input id="username-signup1" type="username" class="form-control username-signup1" />
+      <input id="username-signup" type="username" class="form-control username-signup" />
 
     </div>
     <div class="col-md-12">
       <label for="inputPassword4" class="form-label">Password</label>
-      <input id="password-signup1" type="password" class="form-control password-signup1" />
+      <input id="password-signup" type="password" class="form-control password-signup" />
+
     </div>
-    <div class="gy-3 py-3 my-3 text-center col-12">
-      <button type="submit" class="btn btn-lg btn-dark">Sign Up</button>
+
+    <div class="gy-3 py-3 my-3 text-center">
+      <button type="submit" class="btn submitBtn btn-lg btn-dark" style="color:white">Login</button>
+      <a href="/signup" class="btn btn-lg  btn-primary" role="button" aria-disabled="true">Sign up</a>
+
     </div>
+
   </form>
-</div>
+
 </div>
