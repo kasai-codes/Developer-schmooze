@@ -1,16 +1,18 @@
-<h1 class="text-center">{{username}}'s Posts</h1>
-  <form action="/create">
-    <button type="button" class="btn btn-primary btn-lg">Create Post</button>
-  </form>
+<h2>{{username}}'s posts</h2>
+<form action="/create">
+<br>
+  <button class="btn btn-primary" type="submit">New post</button>
+</form>
+{{#each posts as |post|}}
+  <div class="flex-column justify-space-between">
+    <h3>{{post.title}}</h3>
+    <div>Created: {{format_date post.createdAt}}</div>
+    <div>Updated: {{format_date post.updatedAt}}</div>
+    <form action="/edit/{{post.id}}">
+      <button class="btn btn-primary" type="submit">Edit</button>
+    </form>
 
-  {{#each posts as |post}}
-
-  <div class="mb-3">
-      <h3>post.title</h3>
-<div>Updated at: {{format_date post.updatedAt}}</div>
-<div>Created at: {{format_date post.createdAt}}</div>
-      <a href="/edit/{{post.id}}"><button type="button" class="btn btn-warning">Edit Post</button></a>
   </div>
-
-
+<br>
+<br>
 {{/each}}
