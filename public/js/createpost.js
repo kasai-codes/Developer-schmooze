@@ -16,10 +16,11 @@ const createFormHandler = async (event) => {
     });
   
     if (response.ok) {
+     
       document.location.replace('/dashboard');
     } else {
-      alert(response.statusText);
+      alert('Failed to create new post');
     }
   }
   
-  document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);
+  document.querySelector('.post-form').addEventListener('submit', createFormHandler);

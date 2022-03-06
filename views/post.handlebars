@@ -6,22 +6,24 @@
 
 
 {{#if logged_in}}
-<form id="comment-form">
-  <input type="hidden" id="post_id" value="{{post.id}}">
-  <div class="form-floating"
-    <textarea type="text" id="comment" placeholder="Comment"></textarea>
+<form class="comment-form">
+ <input type="hidden" id="post_id" value="{{post.id}}">
+  <div class="form-floating">
+    <textarea class="form-control " placeholder="Leave a comment here" id="comment"
+      style="height: 100px"></textarea>
+
+    <br>
+    <button class="btn btn-primary">Post</button>
   </div>
-  <button class="btn btn-primary">Post</button>
 </form>
+
 {{else}}
-<a href="/login">Log in to comment.</a>
+<a href="/login">Login to comment.</a>
 {{/if}}
 
 <br>
 {{#each post.comments as |comment|}}
-    {{>comment}}
+{{>comment}}
 {{/each}}
 
-{{#if logged_in}}
 <script src="/js/comment.js"></script>
-{{/if}}
