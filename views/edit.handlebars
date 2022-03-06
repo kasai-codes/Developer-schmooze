@@ -1,0 +1,18 @@
+<br>
+<form class="edit-post-form">
+    <div class="mb-3 post-form">
+        <label for="formGroupExampleInput" class="form-label">Post title</label>
+        <input type="text" class="form-control" id="title" value="{{post.title}}">
+    </div>
+    <br>
+
+    <input type="hidden" id="post_id" value="{{post.id}}">
+    <div class="form-floating">
+        <textarea class="form-control" id="content" style="height: 200px">{{post.content}}</textarea>
+
+        <br>
+        <button class="btn btn-primary">Post</button>
+    </div>
+</form>
+
+<script src="/js/editPost.js"></script>
