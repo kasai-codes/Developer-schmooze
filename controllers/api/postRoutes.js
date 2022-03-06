@@ -1,6 +1,43 @@
 const router = require('express').Router();
 const { Post } = require('../../models');
 
+
+router.get('/:id', async (req, res) => {
+  try {
+    // Get all projects and JOIN with user data
+    const postData = await Post.findByPk({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+      attributes: [
+        'id',
+        'title',
+        'date_created',
+        'content'
+      ],
+      include: [
+        {
+          model: User,
+          attributes: ['name']
+        },
+        {
+        model: Comment,
+        attributes: [
+          'id',
+          'post_comment',
+          'post_id',
+          'user_id'],
+          include: {
+            model:User,
+            attributes: ['name']
+          }
+        },
+      ],
+    });
+
+
+
 router.post('/', async (req, res) => {
   try {
     const postData = await Post.create({

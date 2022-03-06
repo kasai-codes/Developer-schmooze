@@ -3,127 +3,61 @@ const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, (req, res) => {
-    Post.findAll({
-      where: {
-        // use the ID from the session
-        user_id: req.session.user_id
-      },
-      attributes: [
-        'id',
-        'title',
-        'created_at',
-        'content'
-      ],
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-          include: {
-            model: User,
-            attributes: ['username']
-          }
-        },
-        {
-          model: User,
-          attributes: ['username']
-        }
-      ]
-    })
-      .then(dbPostData => {
-        // serialize data before passing to template
-        const posts = dbPostData.map(post => post.get({ plain: true }));
-        res.render('dashboard', { posts, loggedIn: true });
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
+router.get('/', withAuth, async (req, res) => {
+  try {
+    
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Post }],
+    });
 
-  router.get('/edit/:id', withAuth, (req, res) => {
-    Post.findOne({
-      where: {
-        id: req.params.id
-      },
-      attributes: [
-        'id',
-        'title',
-        'created_at',
-        'content'
-      ],
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-          include: {
-            model: User,
-            attributes: ['username']
-          }
-        },
-        {
-          model: User,
-          attributes: ['username']
-        }
-      ]
-    })
-      .then(dbPostData => {
-        if (!dbPostData) {
-          res.status(404).json({ message: 'No post found with this id' });
-          return;
-        }
-  
-        // serialize the data
-        const post = dbPostData.get({ plain: true });
+    const user = userData.get({ plain: true });
 
-        res.render('edit-post', {
-            post,
-            loggedIn: true
-            });
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+    res.render('dashboard', {
+      ...user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-router.get('/create/', withAuth, (req, res) => {
-    Post.findAll({
-      where: {
-        // use the ID from the session
-        user_id: req.session.user_id
-      },
-      attributes: [
-        'id',
-        'title',
-        'created_at',
-        'content'
-      ],
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-          include: {
-            model: User,
-            attributes: ['username']
-          }
-        },
-        {
-          model: User,
-          attributes: ['username']
-        }
-      ]
-    })
-      .then(dbPostData => {
-        // serialize data before passing to template
-        const posts = dbPostData.map(post => post.get({ plain: true }));
-        res.render('create-post', { posts, loggedIn: true });
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+
+
+router.get("/", withAuth, (req, res) => {
+Post.findAll({
+  where: {
+    user_id: req.session.user_id
+  }
+})
+  .then(postData => {
+    const posts = postData.map((post) => post.get({ plain: true }));
+    
+    res.render("dashboard", {
+      posts,
+     
+    });
+  })
+  .catch(err => {
+    console.log(err);
+    res.redirect("login");
   });
+});
+
+
+
+router.post('/', withAuth, async (req, res) => {
+try {
+  const newPost = await Post.create({
+    ...req.body,
+    user_id: req.session.user_id,
+  });
+
+  res.status(200).json(newPost);
+} catch (err) {
+  res.status(400).json(err);
+}
+});
 
 
 module.exports = router;

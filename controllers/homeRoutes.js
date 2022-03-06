@@ -3,110 +3,87 @@ const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 const withAuth = require("../utils/auth");
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ["username"],
-        },
-      ],
-      order: [["created_at", "DESC"]],
+      include: [User],
     });
 
-    const posts = postData.map((post) => post.toJSON());
+    const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render("homepage", {
+    res.render('homepage', { 
       posts,
-      logged_in: req.session.logged_in,
-      username: req.session.username,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
 
 
-router.get("/post/:id", async (req, res) => {
+// VIEW SINGLE POSTS WITH COMMENTS.
+router.get('/post/:id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
+
       include: [
-        {
-          model: User,
-          attributes: ["username", "id"],
-        },
+        User,
         {
           model: Comment,
-          include: {
-            model: User,
-            attributes: ["username", "id"],
-          },
-        },
+          attributes: ['id', 'post_comment', 'post_id', 'date_created', 'user_id'],
+          include: [User],
+        }
       ],
-      order: [[Comment, "createdAt", "DESC"]],
     });
 
-    const post = postData.toJSON();
+    const post = postData.get({ plain: true });
+    const userPost = postData.user_id === req.session.user_id
 
-    res.render("post", {
-      post,
-      logged_in: req.session.logged_in,
-      username: req.session.username,
+    res.render('post', {
+      ...post,
+      userPost,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
 
-router.get("/login", (req, res) => {
-  res.render("login");
-});
 
-router.get("/signup", (req, res) => {
-  res.render("signup");
-});
-
-router.get("/dashboard", withAuth, async (req, res) => {
-  const postsData = await Post.findAll({
+// EDIT SINGLE POST
+router.get('/post/edit/:id', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {   
+      title: req.body.title,
+      content: req.body.content
+    }, 
+    {
     where: {
+      id: req.params.id,
       user_id: req.session.user_id,
     },
-    order: [["createdAt", "DESC"]],
-  });
-  const posts = postsData.map((post) => post.toJSON());
-  res.render("dashboard", {
-    posts,
-    user_id: req.session.user_id,
-    username: req.session.username,
-    logged_in: req.session.logged_in,
-  });
+      
+    });
+
+    const post = postData.get({ plain: true });
+
+    res.render('edit', {
+      ...post,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
+// ALLOWS USER TO LOGIN.
+router.get('/login', (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
 
-router.get("/create", withAuth, (req, res) => {
-  res.render("create", {
-    user_id: req.session.user_id,
-    username: req.session.username,
-    logged_in: req.session.logged_in,
-  });
-});
-
-
-router.get("/edit/:id", withAuth, async (req, res) => {
-  const postData = await Post.findByPk(req.params.id);
-  const post = postData.toJSON();
-  post.content = post.content.replaceAll("<br />", "\n");
-
-
-  res.render("edit", {
-    post,
-    user_id: req.session.user_id,
-    username: req.session.username,
-    logged_in: req.session.logged_in,
-  });
+  res.render('login');
 });
 
 
