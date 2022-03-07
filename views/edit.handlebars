@@ -2,7 +2,7 @@
 <form class="edit-post-form">
     <div class="mb-3 post-form">
         <label for="formGroupExampleInput" class="form-label">Post title</label>
-        <input type="text" class="form-control" id="title" value="{{post.title}}">
+        <input type="text" class="form-control" id="title" value="{{post.content}}">
     </div>
     <br>
 
@@ -11,7 +11,11 @@
         <textarea class="form-control" id="content" style="height: 200px">{{post.content}}</textarea>
 
         <br>
-        <button class="btn btn-primary">Post</button>
+        <button class="btn btn-primary">Update</button>
+
+        <div class="position-absolute bottom-0 end-0">
+            <button class="btn btn-danger" id="delete-post-btn">Delete</button>
+        </div>
     </div>
 </form>
 

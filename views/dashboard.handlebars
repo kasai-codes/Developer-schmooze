@@ -8,7 +8,7 @@
   <div class="flex-column justify-space-between">
     <h3>{{post.title}}</h3>
     <div>Created: {{format_date post.createdAt}}</div>
-    <div>Updated: {{format_date post.updatedAt}}</div>
+    {{!-- <div>Updated: {{format_date post.updatedAt}}</div> --}}
     <form action="/edit/{{post.id}}">
       <button class="btn btn-primary" type="submit">Edit</button>
     </form>

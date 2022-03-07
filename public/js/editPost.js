@@ -28,7 +28,7 @@ const deleteFormHandler = async (event) => {
   const id = window.location.pathname.split('/').pop();
 
   if (id) {
-    const response = await fetch('/api/post/' + id, {
+    const response = await fetch('/api/posts/' + id, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -43,5 +43,5 @@ const deleteFormHandler = async (event) => {
   }
 };
 
-document.querySelector('#edit-post-form').addEventListener('submit', editFormHandler);
-document.querySelector('#delete-button').addEventListener('click', deleteFormHandler);
+document.querySelector('.edit-post-form').addEventListener('submit', editFormHandler);
+document.querySelector('#delete-post-btn').addEventListener('click', deleteFormHandler);

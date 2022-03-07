@@ -1,28 +1,27 @@
 {{#each posts as |post|}}
-<div class="row mb-4 post">
-  <div class="col-md-5">
+<div class="row mb-4 post"style="border: black 1px solid;">
+  <div class="col-md-5" >
 
-    {{! Post Title }}
+
     <h2>
       <a href="/post/{{post.id}}">{{post.title}}</a>
     </h2>
 
-    {{! Post Meta: User & Date Submitted }}
+
     <p>
       <span style="margin-right:20px;">
-        
-        {{user.name}}
+       Post created by:  {{user.username}}
       </span>
       <span style="margin-right:20px;">
-     {{format_date createdAt}}
+        {{format_date createdAt}}
       </span>
     </p>
 
   </div>
 
-  {{! Post Content }}
+
   <div class="col-md-7">
-    <p class="home-post-list">
+    <p>
       {{post.content}}
     </p>
 

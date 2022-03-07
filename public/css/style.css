@@ -1,6 +1,10 @@
-#footer {
-    position: absolute !important;
-    bottom: 0 !important;
-    width: 100% !important;
-    height: 2.5rem !important;            /* Footer height */
-  }
+
+
+  body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
+}
