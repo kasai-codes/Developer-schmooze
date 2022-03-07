@@ -2,25 +2,25 @@ const editFormHandler = async (event) => {
   event.preventDefault();
   const title = document.querySelector('#title').value.trim();
   const content = document.querySelector('#content').value;
-  const id = window.location.pathname.split('/').pop();
+  const id = window.location.toString().split('/')[
+    window.location.toString().split('/').length - 1  
+  ];
 
-  const response = await fetch(`/api/posts/${id}`, {
-    method: 'PUT',
-    body: JSON.stringify({
-      title,
-      content,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+    const response = await fetch(`/api/posts/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ title, content }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  if (response.ok) {
-    document.location.replace('/dashboard/');
-  } else {
-    alert(response.statusText);
-  }
-};
+    if (response.ok) {
+      document.location.replace(`/dashboard`);
+    } else {
+      alert('Failed to edit post');
+    }
+  };
+
 
 const deleteFormHandler = async (event) => {
   event.preventDefault();
@@ -43,5 +43,9 @@ const deleteFormHandler = async (event) => {
   }
 };
 
-document.querySelector('.edit-post-form').addEventListener('submit', editFormHandler);
-document.querySelector('#delete-post-btn').addEventListener('click', deleteFormHandler);
+document
+  .querySelector('.edit-post-form')
+  .addEventListener('submit', editFormHandler);
+document
+  .querySelector('#delete-post-btn')
+  .addEventListener('click', deleteFormHandler);
