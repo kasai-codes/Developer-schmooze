@@ -46,4 +46,4 @@ With Developer Schmooze, Dev's from all walks of life can now come together and 
 
 ## Deployed 
 
-* [Developer Schmooze](https://kasaipreston.github.io/Weather-app/) 
+* [Developer Schmooze](https://developer-schmooze.herokuapp.com/) 
