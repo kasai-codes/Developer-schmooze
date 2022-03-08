@@ -38,7 +38,7 @@ router.put('/:id', async (req, res) => {
       },
     });
 
-    const postData = await post.findByPk(req.params.id);
+    const postData = await Post.findByPk(req.params.id);
     const post = postData.toJSON();
 
     res.status(200).json({
@@ -46,7 +46,7 @@ router.put('/:id', async (req, res) => {
     });
   } catch (err) {
     let message = 'Something went wrong.';
-
+console.log(err)
     if (!err.errors) {
       res.status(400).json({
         message,
