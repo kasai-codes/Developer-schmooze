@@ -7,6 +7,7 @@
 * [Description](#description)
 * [Technologies](#technologies)
 * [Preview](#preview)
+* [Deployed](#deployed)
 
 ## User Story
 
@@ -42,3 +43,7 @@ With Developer Schmooze, Dev's from all walks of life can now come together and 
 
 ![Screen shot](public/images/screenshot1.png)
 ![Screen shot](public/images/screenshot2.png)
+
+## Deployed 
+
+* [Developer Schmooze](https://kasaipreston.github.io/Weather-app/) 
